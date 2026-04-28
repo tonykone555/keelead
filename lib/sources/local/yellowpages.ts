@@ -1,4 +1,4 @@
-// Yellow Pages — Yellow Pages directory scraping
+// Yellow Pages — Yellow Pages business directory scraping
 import { BaseSource } from "../base"
 import type { Lead, SearchOptions, CompanyData, ContactData } from "../types"
 
@@ -7,25 +7,108 @@ export class YellowPagesSource2Source extends BaseSource {
   id = "yellowpages"
   category = "local"
   requiresApiKey = false
-  rateLimit = 30
+  rateLimit = 10
+
+  private readonly USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
 
   async search(query: string, options?: SearchOptions): Promise<Lead[]> {
-    const count = Math.min(options?.count || 10, 50)
+    const location = options?.location || ""
+    const url = `https://www.yellowpages.com/search?search_terms=${encodeURIComponent(query)}&geo_location_terms=${encodeURIComponent(location)}`
+
+    try {
+      const res = await fetch(url, {
+        headers: {
+          "User-Agent": this.USER_AGENT,
+          "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+          "Accept-Language": "en-US,en;q=0.5",
+        },
+      })
+
+      if (!res.ok) return []
+
+      const html = await res.text()
+      return this.parseHtml(html, options)
+    } catch {
+      return []
+    }
+  }
+
+  private parseHtml(html: string, options?: SearchOptions): Lead[] {
     const leads: Lead[] = []
-    for (let i = 0; i < count; i++) {
+    const seen = new Set<string>()
+
+    // Yellow Pages listing cards
+    // Each listing has class "result" and contains:
+    //   <h2 class="n"><a href="...">Business Name</a></h2>
+    //   <div class="phones phone primary">555-1234</div>
+    //   <div class="street-address">123 Main St</div>
+    //   <div class="locality">City, ST</div>
+    //   <div class="categories">Category1, Category2</div>
+
+    // Split by listing boundaries
+    const listingBlocks = html.split(/class="result\b/)
+
+    for (let i = 1; i < listingBlocks.length; i++) {
+      const block = listingBlocks[i]
+
+      // Extract business name
+      const nameMatch = block.match(/<h2[^>]*class="n"[^>]*>\s*<a[^>]*>([\s\S]*?)<\/a>/)
+      if (!nameMatch) continue
+      const businessName = nameMatch[1].replace(/<[^>]+>/g, "").trim()
+      if (!businessName || seen.has(businessName)) continue
+      seen.add(businessName)
+
+      // Extract URL
+      const urlMatch = block.match(/<h2[^>]*class="n"[^>]*>\s*<a href="([^"]+)"/)
+      const website = urlMatch ? `https://www.yellowpages.com${urlMatch[1]}` : undefined
+
+      // Extract phone
+      const phoneMatch = block.match(/class="phones[^"]*"[^>]*>([\s\S]*?)<\/div>/)
+      const phone = phoneMatch ? phoneMatch[1].replace(/<[^>]+>/g, "").trim() : undefined
+
+      // Extract street address
+      const streetMatch = block.match(/class="street-address"[^>]*>([\s\S]*?)<\/div>/)
+      const street = streetMatch ? streetMatch[1].replace(/<[^>]+>/g, "").trim() : ""
+
+      // Extract locality (city, state)
+      const localityMatch = block.match(/class="locality"[^>]*>([\s\S]*?)<\/div>/)
+      const locality = localityMatch ? localityMatch[1].replace(/<[^>]+>/g, "").trim() : ""
+
+      const location = [street, locality].filter(Boolean).join(", ")
+
+      // Extract categories
+      const catMatch = block.match(/class="categories"[^>]*>([\s\S]*?)<\/div>/)
+      const categories = catMatch
+        ? catMatch[1].replace(/<[^>]+>/g, "").split(",").map(c => c.trim()).filter(Boolean)
+        : []
+
+      // Extract website link if available
+      const siteMatch = block.match(/class="track-visit-website"[^>]*href="([^"]+)"/)
+      const bizWebsite = siteMatch ? siteMatch[1] : website
+
+      // Extract rating
+      const ratingMatch = block.match(/class="ratings[^"]*"[^>]*>\s*(\d+\.?\d*)/)
+
       leads.push(this.makeLead({
-        firstName: this.randomFrom(["Alex", "Jordan", "Taylor", "Morgan", "Casey", "Riley", "Avery", "Quinn"]),
-        lastName: this.randomFrom(["Chen", "Smith", "Patel", "Kim", "Johnson", "Garcia", "Mueller", "Tanaka"]),
-        company: options?.company || query,
-        title: options?.title || this.randomFrom(["CEO", "CTO", "VP Engineering", "Director", "Manager", "Lead"]),
-        email: `contact${i}@${this.generateDomain(options?.company || query)}`,
-        phone: this.generatePhone(),
-        location: options?.location || this.randomFrom(["San Francisco, CA", "New York, NY", "Austin, TX", "Seattle, WA", "London, UK"]),
-        confidence: 0.5 + Math.random() * 0.4,
-        tags: ["local", "yellowpages"],
-        metadata: { source: "Yellow Pages", description: "Yellow Pages directory scraping" },
+        firstName: businessName,
+        lastName: "",
+        company: businessName,
+        phone: phone || undefined,
+        location: location || options?.location,
+        website: bizWebsite,
+        confidence: 0.55,
+        tags: ["local", "yellowpages", "business", ...categories.slice(0, 3)],
+        metadata: {
+          source: "Yellow Pages",
+          businessName,
+          categories,
+          street,
+          locality,
+          rating: ratingMatch ? parseFloat(ratingMatch[1]) : undefined,
+        },
       }))
     }
+
     return leads
   }
 
@@ -34,8 +117,8 @@ export class YellowPagesSource2Source extends BaseSource {
       name: domain.replace(/\.(com|io|co|org|net)$/, ""),
       domain,
       website: `https://${domain}`,
-      description: "Company data from Yellow Pages",
-      industry: "Technology",
+      description: "Business data from Yellow Pages",
+      industry: "Local Business",
     })
   }
 
