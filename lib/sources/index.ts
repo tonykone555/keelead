@@ -7,6 +7,7 @@ import bingSource from "./search/bing"
 import duckduckgoSource from "./search/duckduckgo"
 import braveSource from "./search/brave"
 import searxngSource from "./search/searxng"
+import googleCacheSource from "./search/google-cache"
 
 import linkedinSource from "./professional/linkedin"
 import xingSource from "./professional/xing"
@@ -20,6 +21,7 @@ import glassdoorSource from "./company/glassdoor"
 import indeedSource from "./company/indeed"
 import builtinSource from "./company/builtin"
 import g2Source from "./company/g2"
+import builtwithSource from "./company/builtwith"
 
 import openstreetmapSource from "./local/openstreetmap"
 import googleMapsSource from "./local/google-maps"
@@ -64,26 +66,28 @@ import googleScholarSource from "./education/google-scholar"
 import researchgateSource from "./education/researchgate"
 import orcidSource from "./education/orcid"
 import academiaSource from "./education/academia"
+import wikidataSource from "./education/wikidata"
 
 import hunterSource from "./email/hunter"
 import clearbitSource from "./email/clearbit"
 import whoisSource from "./email/whois"
 import dnsLookupSource from "./email/dns-lookup"
 import sslCertSource from "./email/ssl-cert"
+import emailGuesserSource from "./email/email-guesser"
 
 import eventbriteSource from "./events/eventbrite"
 import meetupSource from "./events/meetup"
 import lumaSource from "./events/luma"
 import conferenceSpeakersSource from "./events/conference-speakers"
 
-// Master registry — 62 data sources
+// Master registry — 67 data sources
 const ALL_SOURCES: DataSource[] = [
-  // Search (5)
-  googleSource, bingSource, duckduckgoSource, braveSource, searxngSource,
+  // Search (6)
+  googleSource, bingSource, duckduckgoSource, braveSource, searxngSource, googleCacheSource,
   // Professional (4)
   linkedinSource, xingSource, angellistSource, crunchbaseSource,
-  // Company (7)
-  opencorporatesSource, secEdgarSource, companiesHouseSource, glassdoorSource, indeedSource, builtinSource, g2Source,
+  // Company (8)
+  opencorporatesSource, secEdgarSource, companiesHouseSource, glassdoorSource, indeedSource, builtinSource, g2Source, builtwithSource,
   // Local (9)
   openstreetmapSource, googleMapsSource, yelpSource, yellowpagesSource, foursquareSource, bbbSource, chamberOfCommerceSource, thumbtackSource, homeadvisorSource,
   // Social (8)
@@ -94,10 +98,10 @@ const ALL_SOURCES: DataSource[] = [
   producthuntSource, indiehackersSource, betalistSource, f6sSource, gustSource,
   // Government (6)
   samgovSource, usaspendingSource, censusSource, euRegisterSource, patentsSource, trademarksSource,
-  // Education (4)
-  googleScholarSource, researchgateSource, orcidSource, academiaSource,
-  // Email (5)
-  hunterSource, clearbitSource, whoisSource, dnsLookupSource, sslCertSource,
+  // Education (5)
+  googleScholarSource, researchgateSource, orcidSource, academiaSource, wikidataSource,
+  // Email (6)
+  hunterSource, clearbitSource, whoisSource, dnsLookupSource, sslCertSource, emailGuesserSource,
   // Events (4)
   eventbriteSource, meetupSource, lumaSource, conferenceSpeakersSource,
 ]
@@ -266,3 +270,9 @@ export const sourceManager = new SourceManager()
 
 // Re-export types
 export type { DataSource, Lead, CompanyData, ContactData, SearchOptions, SourceCategory } from "./types"
+
+// Re-export new tools
+export { LeadEnricher, leadEnricher } from "../enrichment/lead-enricher"
+export type { EnrichedLead } from "../enrichment/lead-enricher"
+export { generatePermutations, verifyPermutations, findLikelyEmails } from "../email/permutator"
+export type { PermutationResult, VerifiedPermutation } from "../email/permutator"
