@@ -21,6 +21,7 @@ import indeedSource from "./company/indeed"
 import builtinSource from "./company/builtin"
 import g2Source from "./company/g2"
 
+import openstreetmapSource from "./local/openstreetmap"
 import googleMapsSource from "./local/google-maps"
 import yelpSource from "./local/yelp"
 import yellowpagesSource from "./local/yellowpages"
@@ -75,7 +76,7 @@ import meetupSource from "./events/meetup"
 import lumaSource from "./events/luma"
 import conferenceSpeakersSource from "./events/conference-speakers"
 
-// Master registry — 57 data sources
+// Master registry — 62 data sources
 const ALL_SOURCES: DataSource[] = [
   // Search (5)
   googleSource, bingSource, duckduckgoSource, braveSource, searxngSource,
@@ -83,8 +84,8 @@ const ALL_SOURCES: DataSource[] = [
   linkedinSource, xingSource, angellistSource, crunchbaseSource,
   // Company (7)
   opencorporatesSource, secEdgarSource, companiesHouseSource, glassdoorSource, indeedSource, builtinSource, g2Source,
-  // Local (8)
-  googleMapsSource, yelpSource, yellowpagesSource, foursquareSource, bbbSource, chamberOfCommerceSource, thumbtackSource, homeadvisorSource,
+  // Local (9)
+  openstreetmapSource, googleMapsSource, yelpSource, yellowpagesSource, foursquareSource, bbbSource, chamberOfCommerceSource, thumbtackSource, homeadvisorSource,
   // Social (8)
   twitterSource, githubSource, redditSource, facebookSource, instagramSource, tiktokSource, youtubeSource, pinterestSource,
   // Developer (6)

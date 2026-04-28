@@ -1,337 +1,272 @@
-<div align="center">
+<p align="center">
+  <img src="public/logo.svg" width="120" alt="KeeLead Logo">
+</p>
 
-<img src="public/logo.svg" alt="KeeLead Logo" width="120" height="120">
+<h1 align="center">⚡ KeeLead</h1>
 
-# ⚡ KeeLead
+<p align="center">
+  <strong>Find leads. Verify emails. Research companies. Close deals.</strong>
+</p>
 
-### The Ultimate Open Source AI-Powered Lead Generation Engine
+<p align="center">
+  A free, open-source, self-hosted lead generation platform powered by AI with 62 data sources.
+</p>
 
-**Find leads. Verify emails. Research companies. Close deals.**
-
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
-[![Next.js](https://img.shields.io/badge/Next.js-14-black?logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue?logo=typescript)](https://www.typescriptlang.org/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.4-38bdf8?logo=tailwindcss)](https://tailwindcss.com/)
-[![Prisma](https://img.shields.io/badge/Prisma-5.22-2D3748?logo=prisma)](https://www.prisma.io/)
-[![SQLite](https://img.shields.io/badge/SQLite-3-003B57?logo=sqlite)](https://www.sqlite.org/)
-[![MCP](https://img.shields.io/badge/MCP-Compatible-green)](https://modelcontextprotocol.io/)
-[![AI Agents](https://img.shields.io/badge/AI%20Agents-Ready-purple)](#-ai-agent-integration)
-[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker)](#-docker)
-
-[Features](#-features) • [Quick Start](#-quick-start) • [Data Sources](#-62-data-sources) • [AI Agents](#-ai-agent-integration) • [API](#-api-documentation) • [CLI](#-cli) • [Docker](#-docker) • [Architecture](#-architecture) • [Contributing](#-contributing)
-
----
-
-**KeeLead** is a free, open-source, self-hosted lead generation platform that combines the power of AI with 62+ data sources to help you find leads, verify emails, research companies, and grow your business — all through a beautiful ChatGPT-like interface.
-
-> 🆓 **Free forever.** No per-seat pricing. No credit limits. No vendor lock-in. Your data stays on your server.
-
-</div>
+<p align="center">
+  <a href="#-features">Features</a> •
+  <a href="#-quick-start">Quick Start</a> •
+  <a href="#-data-sources">Data Sources</a> •
+  <a href="#-configuration">Configuration</a> •
+  <a href="#-api-keys-guide">API Keys Guide</a> •
+  <a href="#-docker">Docker</a> •
+  <a href="#-architecture">Architecture</a> •
+  <a href="#-contributing">Contributing</a>
+</p>
 
 ---
 
-## 📖 Table of Contents
+## 🆓 Why KeeLead?
 
-- [Why KeeLead?](#-why-keelead)
-- [Features](#-features)
-- [Screenshots](#-screenshots)
-- [Quick Start](#-quick-start)
-- [Detailed Installation](#-detailed-installation)
-- [Configuration](#-configuration)
-- [62 Data Sources](#-62-data-sources)
-- [AI Chat Interface](#-ai-chat-interface)
-- [Dashboard](#-dashboard)
-- [Lead Management](#-lead-management)
-- [Email Verification](#-email-verification)
-- [Company Research](#-company-research)
-- [Contact Finder](#-contact-finder)
-- [Campaign Management](#-campaign-management)
-- [Email Sequences](#-email-sequences)
-- [Pipeline (Kanban)](#-pipeline-kanban)
-- [Intent Signals](#-intent-signals)
-- [Analytics](#-analytics)
-- [Export Center](#-export-center)
-- [Compliance](#-compliance)
-- [Settings](#-settings)
-- [AI Agent Integration](#-ai-agent-integration)
-- [MCP Server](#-mcp-server)
-- [API Documentation](#-api-documentation)
-- [CLI](#-cli)
-- [Docker](#-docker)
-- [Architecture](#-architecture)
-- [Tech Stack](#-tech-stack)
-- [Project Structure](#-project-structure)
-- [Database Schema](#-database-schema)
-- [Webhooks](#-webhooks)
-- [Plugin System](#-plugin-system)
-- [Templates](#-templates)
-- [Batch Operations](#-batch-operations)
-- [Caching](#-caching)
-- [Security](#-security)
-- [Performance](#-performance)
-- [Troubleshooting](#-troubleshooting)
-- [Roadmap](#-roadmap)
-- [Contributing](#-contributing)
-- [License](#-license)
-- [Acknowledgments](#-acknowledgments)
-
----
-
-## 🤔 Why KeeLead?
-
-### The Problem
-- 💰 **Expensive**: Tools like ZoomInfo ($15K+/yr), Apollo ($49-$149/mo), Clay ($149-$800/mo)
-- 🔒 **Closed source**: You don't own your data, vendor lock-in
-- 🚫 **Rate limits**: Artificial caps on searches and exports
-- 🤷 **No AI integration**: Can't use with your own AI agents
-- 📊 **Fragmented**: Need 5+ tools for a complete lead gen workflow
-
-### The Solution: KeeLead
-- 🆓 **100% Free**: MIT licensed, use forever, no limits
-- 🔓 **Open source**: Full source code, modify anything
-- 🏠 **Self-hosted**: Your data never leaves your server
-- 🤖 **AI-native**: Built-in MCP server for AI agent integration
-- 🧩 **All-in-one**: 62 data sources, email verification, company research, campaigns, analytics — in one tool
-
-### Who Is This For?
-- 🏢 **Sales teams** looking for a free alternative to expensive lead databases
-- 🚀 **Startup founders** who need leads but can't afford ZoomInfo
-- 📊 **Marketing teams** doing outbound campaigns
-- 💻 **Developers** who want to build on top of a lead gen platform
-- 🤖 **AI engineers** who want lead gen tools for their agents
-- 🔍 **Researchers** doing market research or competitive analysis
-- 📧 **Recruiters** finding talent and verifying contact info
+| Problem | KeeLead Solution |
+|---------|-----------------|
+| 💰 ZoomInfo costs $15K+/yr, Apollo $49-149/mo | **100% Free** — MIT licensed, use forever |
+| 🔒 Closed source, vendor lock-in | **Open source** — full code, modify anything |
+| 🚫 Rate limits, artificial caps | **Self-hosted** — your data, your limits |
+| 🤷 No AI integration | **AI-native** — MCP server, function calling |
+| 📊 Need 5+ tools for lead gen | **All-in-one** — 62 sources in one tool |
 
 ---
 
 ## ✨ Features
 
-### 🤖 AI Chat Interface
-- **ChatGPT/Claude-style interface** for natural language lead generation
-- Ask questions like: *"Find me 50 SaaS founders in San Francisco"*
-- Multi-provider AI support: OpenAI, Claude, OpenRouter, NVIDIA, Ollama, Groq, Mistral, Together AI, LM Studio, HuggingFace, custom endpoints
+### 🔍 62 Data Sources
+- **35 FREE sources** — No API key required, works out of the box!
+- **27 premium sources** — Optional API keys for enhanced data
+- Categories: Search, Professional, Company, Local Business, Social Media, Developer, Startup, Government, Education, Email, Events
+
+### 💬 AI Chat Interface
+- ChatGPT/Claude-style natural language interface
+- Ask: *"Find me 50 SaaS founders in San Francisco"*
+- Multi-provider: OpenAI, Claude, Ollama, Groq, Mistral, NVIDIA, OpenRouter
 - Streaming responses with markdown, tables, and code blocks
-- Conversation history with search
-- Command suggestions
-- Rich result cards with inline export
 
-### 📊 Dashboard
-- **15+ pages** with full dark theme
-- Real-time stats and charts
-- Lead quality visualization
-- Source performance breakdown
-- Campaign analytics
-- Activity feed
-- Quick actions
-
-### 👥 Lead Management
-- Sortable/filterable data table
-- Columns: Name, Company, Title, Email, Phone, Source, Status, Score, Verified
-- Bulk actions (export, delete, tag, enrich)
-- Search and filter bar
-- Lead detail view
-- Custom tags and labels
-- Status tracking (new → contacted → qualified → converted → lost)
-- AI lead scoring (0-100)
-- Smart deduplication with fuzzy matching
-
-### 📌 Pipeline (Kanban)
-- Drag-and-drop pipeline board
-- Stages: New → Contacted → Qualified → Negotiating → Won / Lost
-- Visual deal tracking
-- Quick stage transitions
-- Pipeline value calculation
-
-### 📧 Email Verification
-- **10-layer verification system**:
-  1. ✅ Syntax validation (RFC 5322)
-  2. ✅ Domain existence check
-  3. ✅ MX record verification
-  4. ✅ Disposable email detection (10K+ domain blocklist)
-  5. ✅ Role-based email detection (info@, support@, sales@)
-  6. ✅ Typo suggestion (Levenshtein distance)
-  7. ✅ SMTP RCPT TO verification
-  8. ✅ Catch-all detection
-  9. ✅ Spam trap detection
-  10. ✅ Free provider detection (Gmail, Yahoo, etc.)
+### 📧 10-Layer Email Verification
+- Syntax validation (RFC 5322)
+- Domain existence & MX record verification
+- Disposable email detection (10K+ domain blocklist)
+- SMTP verification, catch-all detection, spam trap detection
 - Score 0-100 with detailed breakdown
-- Bulk CSV verification
-- Upload and verify thousands of emails
 
-### 🏢 Company Research
-- Deep company profiles with one search
-- Company overview, industry, size, revenue
-- Tech stack detection
-- Key people and leadership
-- Funding history and investors
-- Competitor analysis
-- News and press aggregation
-- Social media presence
-- Job posting analysis
-- Org chart estimation
+### 🗺️ OpenStreetMap Local Business Search
+- **FREE worldwide coverage** — no API key needed!
+- Search: "restaurants in London", "dentists in Tokyo", "plumbers near Berlin"
+- 40+ business type mappings
+- Extracts: names, phones, emails, addresses, hours
 
-### 🔍 Contact Finder
-- Search by name, company, title, location
-- Multi-source results with confidence scores
-- Quick export
-- Reverse email lookup
-- Reverse phone lookup
-- Social profile discovery
+### 🤖 Browser Automation
+- Playwright-powered headless browser
+- Scrape JavaScript-heavy sites
+- Form filling, screenshots, infinite scroll
+- Utility functions for tables, lists, cards
 
-### 📨 Campaign Management
-- Create and manage outreach campaigns
-- Campaign cards with stats (sent, open rate, reply rate)
-- Lead assignment
-- Status tracking (draft, active, paused, completed)
-- Multi-channel support (email, LinkedIn, phone, multi)
-
-### 📬 Email Sequences
-- Multi-step drip campaign builder
-- Delay configuration between steps
-- Conditional branching
-- AI email writer
-- Template library
-- A/B testing support
-- Open/click tracking
-
-### 📡 Intent Signals
-- Job change detection alerts
-- Company news tracking
-- Hiring signal detection
-- Social mention monitoring
-- Technology adoption signals
-- Funding round alerts
-
-### 📈 Analytics
-- Dashboard overview with key metrics
-- Source performance breakdown
-- Campaign analytics (open rates, reply rates)
-- Conversion funnel visualization
-- Weekly/monthly trends
-- Custom date ranges
-- Export reports
-
-### 📥 Export Center
-- Export in 7 formats: **CSV, JSON, Excel (XLSX), vCard, PDF, XML, YAML**
-- Filter before export
-- Format preview
-- Download history
-- Batch export
-- Custom field selection
+### 📊 Dashboard & Management
+- 15+ pages with full dark theme
+- Lead management with AI scoring (0-100)
+- Kanban pipeline board
+- Campaign management with drip sequences
+- Analytics & reporting
+- Export in 7 formats (CSV, JSON, Excel, vCard, PDF, XML, YAML)
 
 ### 🛡️ Compliance
-- GDPR compliance tools
-- CAN-SPAM compliance
-- Do-Not-Contact (DNC) list management
-- Audit log with full activity tracking
-- Consent management
-- Data retention policies
-- Right to erasure support
-
-### ⚙️ Settings
-- **AI Model Configuration**: OpenAI, Claude, OpenRouter, NVIDIA, Ollama, Groq, Mistral, custom
-- **Data Sources**: Enable/disable, set priorities and weights
-- **Proxy Configuration**: HTTP/SOCKS5 proxy rotation
-- **Notifications**: Browser, Slack, Discord, email
-- **MCP Server**: Configuration and status
-- **Webhooks**: Create and manage webhooks
-- **Plugin Management**: Install and configure plugins
-- **Theme**: Customize accent colors
-- **API Keys**: Encrypted vault for all keys
+- GDPR tools, CAN-SPAM compliance
+- Do-Not-Contact list management
+- Audit logs, consent management
 
 ---
 
 ## 🚀 Quick Start
 
-### Prerequisites
-- **Node.js** 18+ (recommended: 20+)
-- **npm**, **yarn**, or **pnpm**
-- **Git**
-
-### One-Command Setup
-
 ```bash
-# Clone and setup
-git clone https://github.com/YOUR_USERNAME/keelead.git
+# Clone the repository
+git clone https://github.com/Atum246/keelead.git
 cd keelead
+
+# Install dependencies
 npm install
+
+# Set up database
 npx prisma db push
+
+# Seed with demo data (optional)
 npx tsx prisma/seed.ts
+
+# Start development server
 npm run dev
 ```
 
-Open **http://localhost:3000** in your browser. That's it! 🎉
+Open [http://localhost:3000](http://localhost:3000) 🎉
 
-### First Steps
-1. 🏠 Visit the **Landing Page** at `/` to see features
-2. 💬 Click **Start Chatting** to use the AI interface at `/chat`
-3. 📊 Visit the **Dashboard** at `/dashboard` for full management
-4. ⚙️ Go to **Settings** at `/dashboard/settings` to configure AI providers
-5. 🔍 Try searching: *"Find me 10 SaaS founders in New York"*
+### What Works Immediately (No API Keys!)
+- ✅ 35 free data sources (OpenStreetMap, SEC EDGAR, GitHub, Reddit, etc.)
+- ✅ Email verification (DNS, MX, SMTP checks)
+- ✅ Full dashboard & lead management
+- ✅ Export in 7 formats
+- ✅ Compliance tools
+
+### What Needs API Keys
+- 🤖 AI chat (at least one provider needed)
+- 🔍 Premium search (Google, Bing, Brave)
+- 📱 Social media (Twitter, Instagram, etc.)
+- 💼 Premium data (Crunchbase, Hunter.io, etc.)
 
 ---
 
-## 📦 Detailed Installation
+## 📦 Data Sources (62 Total)
 
-### Method 1: Local Development
+### ✅ FREE Sources (35) — No API Key Required
 
-```bash
-# 1. Clone the repository
-git clone https://github.com/YOUR_USERNAME/keelead.git
-cd keelead
+#### 🔍 Search (2)
+| Source | API | Description |
+|--------|-----|-------------|
+| DuckDuckGo | `api.duckduckgo.com` | Instant Answer API, company info |
+| SearXNG | 7 public instances | Meta search (Google + Bing + DuckDuckGo) |
 
-# 2. Install dependencies
-npm install
+#### 💼 Professional (1)
+| Source | API | Description |
+|--------|-----|-------------|
+| LinkedIn | Google search proxy | Profile discovery via search engines |
 
-# 3. Set up environment variables
-cp .env.example .env
-# Edit .env with your API keys (optional — works without them too)
+#### 🏢 Company (4)
+| Source | API | Description |
+|--------|-----|-------------|
+| SEC EDGAR | `efts.sec.gov` | US public company filings, officers |
+| OpenCorporates | `api.opencorporates.com` | 140+ country company registries |
+| Companies House | UK gov API | UK company registry |
+| Builtin | Scraping | Tech company directory |
 
-# 4. Initialize database
-npx prisma db push
+#### 📍 Local Business (4)
+| Source | API | Description |
+|--------|-----|-------------|
+| **OpenStreetMap** | `overpass-api.de` | **FREE worldwide business data!** |
+| Yellow Pages | Scraping | US business directory |
+| BBB | Scraping | Business ratings & reviews |
+| Chamber of Commerce | Scraping | Local business directories |
 
-# 5. Seed with demo data (optional)
-npx tsx prisma/seed.ts
+#### 📱 Social (2)
+| Source | API | Description |
+|--------|-----|-------------|
+| GitHub | `api.github.com` | Developer profiles (60 req/hr free) |
+| Reddit | `reddit.com/search.json` | User profiles & communities |
 
-# 6. Start development server
-npm run dev
-```
+#### 👨‍💻 Developer (5)
+| Source | API | Description |
+|--------|-----|-------------|
+| NPM | `registry.npmjs.org` | Package authors & maintainers |
+| PyPI | `pypi.org/pypi` | Python package authors |
+| Docker Hub | `hub.docker.com/v2` | Container image publishers |
+| Dev.to | `dev.to/api` | Developer community profiles |
+| Stack Overflow | `api.stackexchange.com` | Developer Q&A profiles |
+| GitHub Orgs | `api.github.com` | Company organizations |
 
-### Method 2: Production Build
+#### 🚀 Startup (2)
+| Source | API | Description |
+|--------|-----|-------------|
+| Indie Hackers | Scraping | Indie founder profiles |
+| Beta List | Scraping | Startup directory |
 
-```bash
-# 1. Clone and install
-git clone https://github.com/YOUR_USERNAME/keelead.git
-cd keelead
-npm install
+#### 🏛️ Government (6)
+| Source | API | Description |
+|--------|-----|-------------|
+| USASpending | `api.usaspending.gov` | Federal contractors & spending |
+| US Census | `api.census.gov` | Business patterns by industry |
+| EU Register | Scraping | EU transparency register |
+| SAM.gov | US gov API | Government contractors |
+| USPTO Patents | `api.patentsview.org` | Patent inventors & holders |
+| USPTO Trademarks | `developer.uspto.gov` | Trademark owners |
 
-# 2. Build for production
-npm run build
+#### 🎓 Education (4)
+| Source | API | Description |
+|--------|-----|-------------|
+| Google Scholar | Scraping | Academic researchers & papers |
+| ResearchGate | Scraping | Researcher profiles |
+| ORCID | `pub.orcid.org` | Researcher IDs & affiliations |
+| Academia.edu | Scraping | Academic profiles |
 
-# 3. Start production server
-npm start
-```
+#### 📧 Email/Domain (3)
+| Source | API | Description |
+|--------|-----|-------------|
+| DNS Lookup | `dns.google/resolve` | MX records, email provider detection |
+| SSL Certificate | `crt.sh` | Certificate Transparency logs |
+| WHOIS | `rdap.org` | Domain registration data |
 
-### Method 3: Docker
+#### 🎤 Events (1)
+| Source | API | Description |
+|--------|-----|-------------|
+| Conference Speakers | PaperCall + Sessionize | Speaker profiles & talks |
 
-```bash
-# Quick start with Docker Compose
-git clone https://github.com/YOUR_USERNAME/keelead.git
-cd keelead
-docker-compose up -d
+---
 
-# Or build manually
-docker build -t keelead .
-docker run -p 3000:3000 keelead
-```
+### 💰 Premium Sources (27) — API Keys Required
 
-### Method 4: npx (Coming Soon)
+#### 🔍 Search (3)
+| Source | Free Tier | Get Key |
+|--------|-----------|---------|
+| Google Custom Search | 100/day | [Google Cloud Console](https://console.cloud.google.com/apis/api/customsearch.googleapis.com) |
+| Bing Web Search | 1,000/month | [Azure Portal](https://portal.azure.com) |
+| Brave Search | 2,000/month | [Brave Search API](https://api.search.brave.com) |
 
-```bash
-npx create-keelead my-leads
-cd my-leads
-npm run dev
-```
+#### 📱 Social Media (7)
+| Source | Free Tier | Get Key |
+|--------|-----------|---------|
+| Twitter/X | Very limited | [Developer Portal](https://developer.twitter.com) |
+| Instagram | Requires app review | [Meta for Developers](https://developers.facebook.com) |
+| Facebook | Requires app review | [Meta for Developers](https://developers.facebook.com) |
+| TikTok | Requires approval | [TikTok for Developers](https://developers.tiktok.com) |
+| YouTube | 10,000 units/day | [Google Cloud Console](https://console.cloud.google.com) |
+| Pinterest | Requires approval | [Pinterest Developers](https://developers.pinterest.com) |
+
+#### 💼 Professional (3)
+| Source | Free Tier | Get Key |
+|--------|-----------|---------|
+| Crunchbase | Limited | [Crunchbase API](https://data.crunchbase.com) |
+| AngelList | Restricted | [Wellfound API](https://wellfound.com) |
+| Xing | Partner only | [Xing Developer](https://developer.xing.com) |
+
+#### 🏢 Company (3)
+| Source | Free Tier | Get Key |
+|--------|-----------|---------|
+| Glassdoor | No public API | N/A |
+| Indeed | No public API | N/A |
+| G2 | No public API | N/A |
+
+#### 📍 Local Business (5)
+| Source | Free Tier | Get Key |
+|--------|-----------|---------|
+| Google Maps | $200/month credit | [Google Cloud Console](https://console.cloud.google.com/apis/api/maps-backend) |
+| Yelp | 5,000/day | [Yelp Fusion](https://fusion.yelp.com) |
+| Foursquare | 100K free | [Foursquare Developer](https://developer.foursquare.com) |
+| Thumbtack | No public API | N/A |
+| HomeAdvisor | No public API | N/A |
+
+#### 📧 Email (2)
+| Source | Free Tier | Get Key |
+|--------|-----------|---------|
+| Hunter.io | 25/month | [Hunter.io](https://hunter.io) |
+| Clearbit | Limited | [Clearbit](https://clearbit.com) |
+
+#### 🚀 Startup (3)
+| Source | Free Tier | Get Key |
+|--------|-----------|---------|
+| Product Hunt | GraphQL API | [Product Hunt API](https://api.producthunt.com/v2/docs) |
+| F6S | API available | [F6S API](https://f6s.com) |
+| Gust | Partner access | [Gust API](https://gust.com) |
+
+#### 🎤 Events (3)
+| Source | Free Tier | Get Key |
+|--------|-----------|---------|
+| Eventbrite | Free tier | [Eventbrite API](https://www.eventbrite.com/platform/api) |
+| Meetup | GraphQL API | [Meetup API](https://www.meetup.com/api/schema) |
+| Luma | API available | [Luma API](https://lu.ma) |
 
 ---
 
@@ -342,474 +277,130 @@ npm run dev
 Copy `.env.example` to `.env` and configure:
 
 ```bash
-# AI Providers (at least one recommended)
-OPENAI_API_KEY=sk-...          # OpenAI (GPT-4o, GPT-4o-mini)
-ANTHROPIC_API_KEY=sk-ant-...   # Anthropic (Claude)
-OPENROUTER_API_KEY=sk-or-...   # OpenRouter (all models)
-NVIDIA_API_KEY=nvapi-...       # NVIDIA NIM
-OLLAMA_BASE_URL=http://localhost:11434  # Ollama (local)
-
-# Optional: Search APIs
-GOOGLE_SEARCH_API_KEY=...      # Google Custom Search
-GOOGLE_SEARCH_CX=...           # Google Search Engine ID
-BING_SEARCH_API_KEY=...        # Bing Web Search
-BRAVE_SEARCH_API_KEY=...       # Brave Search
-
-# Optional: Data Source APIs
-HUNTER_API_KEY=...             # Hunter.io
-CRUNCHBASE_API_KEY=...         # Crunchbase
-CLEARBIT_API_KEY=...           # Clearbit
-
-# Optional: Proxy
-PROXY_URL=                     # HTTP/SOCKS5 proxy URL
-PROXY_ROTATION=false           # Enable proxy rotation
-
-# Optional: Notifications
-SLACK_WEBHOOK_URL=...          # Slack notifications
-DISCORD_WEBHOOK_URL=...        # Discord notifications
+cp .env.example .env
 ```
 
-### AI Provider Setup
+### 🤖 AI Providers (At Least One Required for Chat)
 
-#### OpenAI (Recommended)
-1. Go to https://platform.openai.com/api-keys
-2. Create an API key
-3. Add to `.env`: `OPENAI_API_KEY=sk-...`
+```env
+# OpenAI — Best overall quality
+OPENAI_API_KEY=sk-...
 
-#### Anthropic Claude
-1. Go to https://console.anthropic.com/
-2. Create an API key
-3. Add to `.env`: `ANTHROPIC_API_KEY=sk-ant-...`
+# Anthropic Claude — Great for analysis
+ANTHROPIC_API_KEY=sk-ant-...
 
-#### OpenRouter (Access to 100+ models)
-1. Go to https://openrouter.ai/keys
-2. Create an API key
-3. Add to `.env`: `OPENROUTER_API_KEY=sk-or-...`
+# OpenRouter — Access to ALL models with one key
+OPENROUTER_API_KEY=sk-or-...
 
-#### Ollama (Local AI — 100% Private)
-1. Install Ollama: https://ollama.ai
-2. Pull a model: `ollama pull llama3.1`
-3. KeeLead auto-detects Ollama at `http://localhost:11434`
+# Ollama — FREE local AI (no API key!)
+OLLAMA_BASE_URL=http://localhost:11434
 
-#### NVIDIA NIM
-1. Go to https://build.nvidia.com/
-2. Get your API key
-3. Add to `.env`: `NVIDIA_API_KEY=nvapi-...`
+# NVIDIA NIM — Free tier available
+NVIDIA_API_KEY=nvapi-...
 
----
+# Groq — Ultra-fast inference
+GROQ_API_KEY=gsk_...
 
-## 📡 62 Data Sources
-
-KeeLead ships with **62 modular data source plugins** across **11 categories**. Each source is a separate file that can be enabled, disabled, or extended.
-
-### 🔍 Search Engines (5 sources)
-| Source | API Required | Free Tier | Description |
-|--------|-------------|-----------|-------------|
-| Google Custom Search | Yes | 100/day | Google search results |
-| Bing Web Search | Yes | 1000/month | Microsoft Bing results |
-| DuckDuckGo | No | Unlimited | Privacy-focused search |
-| Brave Search | Yes | 2000/month | Independent search engine |
-| SearXNG | No | Unlimited | Self-hosted meta search |
-
-### 💼 Professional Networks (4 sources)
-| Source | API Required | Free Tier | Description |
-|--------|-------------|-----------|-------------|
-| LinkedIn | No | Public data | Professional profiles |
-| Xing | No | Public data | European professional network |
-| AngelList | No | Public data | Startup founders & jobs |
-| Crunchbase | Yes | 200/month | Startup data & funding |
-
-### 🏢 Company Data (7 sources)
-| Source | API Required | Free Tier | Description |
-|--------|-------------|-----------|-------------|
-| OpenCorporates | No | Unlimited | 140+ country registries |
-| SEC EDGAR | No | Unlimited | US public company filings |
-| Companies House | No | Unlimited | UK company registry |
-| Glassdoor | No | Public data | Company reviews & salaries |
-| Indeed | No | Public data | Job postings & company data |
-| Builtin | No | Public data | Tech company directory |
-| G2 | No | Public data | Software reviews & companies |
-
-### 📍 Local Business (8 sources)
-| Source | API Required | Free Tier | Description |
-|--------|-------------|-----------|-------------|
-| Google Maps/Places | Yes | $200 credit | Local business listings |
-| Yelp | Yes | 5000/day | Restaurant & local business |
-| Yellow Pages | No | Public data | Business directory |
-| Foursquare | Yes | 100K free | Places & venues |
-| BBB | No | Public data | Better Business Bureau |
-| Chamber of Commerce | No | Public data | Local business directories |
-| Thumbtack | No | Public data | Local service providers |
-| HomeAdvisor | No | Public data | Home services directory |
-
-### 📱 Social Media (8 sources)
-| Source | API Required | Free Tier | Description |
-|--------|-------------|-----------|-------------|
-| Twitter/X | No | Public data | Public profiles & bios |
-| GitHub | No | 5000/hour | Developer profiles & orgs |
-| Reddit | No | 60/minute | User profiles & communities |
-| Facebook | No | Public data | Business pages |
-| Instagram | No | Public data | Business profiles |
-| TikTok | No | Public data | Creator profiles |
-| YouTube | Yes | 10K units/day | Channel data |
-| Pinterest | No | Public data | Business accounts |
-
-### 💻 Developer Platforms (6 sources)
-| Source | API Required | Free Tier | Description |
-|--------|-------------|-----------|-------------|
-| GitHub Organizations | No | 5000/hour | Company orgs on GitHub |
-| Stack Overflow | No | 10K/day | Developer Q&A profiles |
-| Dev.to | No | 30/30sec | Developer community |
-| NPM | No | Unlimited | Node.js package authors |
-| PyPI | No | Unlimited | Python package authors |
-| Docker Hub | No | Limited | Container publishers |
-
-### 🚀 Startup Platforms (5 sources)
-| Source | API Required | Free Tier | Description |
-|--------|-------------|-----------|-------------|
-| Product Hunt | No | Public data | Makers & products |
-| Indie Hackers | No | Public data | Indie founder profiles |
-| Beta List | No | Public data | Startup directory |
-| F6S | No | Public data | Startup community |
-| Gust | No | Public data | Startup platform |
-
-### 🏛️ Government & Public (6 sources)
-| Source | API Required | Free Tier | Description |
-|--------|-------------|-----------|-------------|
-| SAM.gov | Yes | Free | US government contractors |
-| USASpending | No | Unlimited | US government spending |
-| US Census | No | Unlimited | Census business data |
-| EU Register | No | Unlimited | EU transparency register |
-| USPTO Patents | No | Unlimited | Patent database |
-| USPTO Trademarks | No | Unlimited | Trademark database |
-
-### 🎓 Education & Research (4 sources)
-| Source | API Required | Free Tier | Description |
-|--------|-------------|-----------|-------------|
-| Google Scholar | No | Public data | Academic publications |
-| ResearchGate | No | Public data | Researcher profiles |
-| ORCID | No | Unlimited | Researcher IDs |
-| Academia.edu | No | Public data | Academic profiles |
-
-### 📧 Email & Domain (5 sources)
-| Source | API Required | Free Tier | Description |
-|--------|-------------|-----------|-------------|
-| Hunter.io | Yes | 25/month | Email finder & verifier |
-| Clearbit | Yes | Limited | Data enrichment |
-| WHOIS | No | Unlimited | Domain registration data |
-| DNS Lookup | No | Unlimited | MX, TXT, A records |
-| SSL Certificates | No | Unlimited | Certificate transparency |
-
-### 🎪 Events (4 sources)
-| Source | API Required | Free Tier | Description |
-|--------|-------------|-----------|-------------|
-| Eventbrite | Yes | Unlimited | Events & attendees |
-| Meetup | Yes | Limited | Groups & members |
-| Luma | No | Public data | Event platform |
-| Conference Speakers | No | Public data | Speaker directories |
-
-### Adding Custom Sources
-
-Create a new file in `lib/sources/your-category/your-source.ts`:
-
-```typescript
-import { BaseSource } from '../base'
-import { Lead, SourceSearchOptions } from '../types'
-
-export class YourSource extends BaseSource {
-  id = 'your-source'
-  name = 'Your Source'
-  category = 'custom'
-  requiresApiKey = true
-  rateLimit = 60 // requests per minute
-
-  async search(query: string, options?: SourceSearchOptions): Promise<Lead[]> {
-    // Your implementation
-    return []
-  }
-
-  async getCompany(domain: string) {
-    // Company lookup
-    return null
-  }
-
-  async getContact(email: string) {
-    // Contact lookup
-    return null
-  }
-}
+# Mistral — European AI
+MISTRAL_API_KEY=...
 ```
 
-Register it in `lib/sources/index.ts` and you're done!
+### 🔍 Search APIs (Optional — Enhances Search Results)
 
----
-
-## 💬 AI Chat Interface
-
-The chat interface is the heart of KeeLead. It's a beautiful, ChatGPT-like experience where you can ask for leads in natural language.
-
-### Example Queries
-
-```
-🔍 "Find me 50 SaaS founders in San Francisco"
-📧 "Verify these emails: john@example.com, sarh@techco.io"
-🏢 "Research Tesla and find their engineering leadership"
-📍 "Find restaurants in NYC with email addresses"
-💼 "Get me VP of Sales at Fortune 500 companies"
-🚀 "Show me YC startups that raised Series A this year"
-🔬 "Find developers who maintain popular React libraries"
-📊 "Compare the tech stacks of Stripe vs Square"
+```env
+GOOGLE_SEARCH_API_KEY=...
+GOOGLE_SEARCH_CX=...
+BING_SEARCH_API_KEY=...
+BRAVE_SEARCH_API_KEY=...
 ```
 
-### Chat Features
-- 💬 Streaming responses
-- 📊 Rich result cards with tables
-- 📥 Inline export buttons
-- 🔄 Regenerate responses
-- 📋 Copy to clipboard
-- 💾 Conversation history
-- 🔍 Search conversations
-- ⌨️ Keyboard shortcuts
+### 📧 Email & Data Enrichment (Optional)
 
----
-
-## 🤖 AI Agent Integration
-
-KeeLead is designed to work seamlessly with AI agents. It provides a **Model Context Protocol (MCP) server** that any AI agent can connect to.
-
-### Supported AI Agents
-
-| Agent | Status | Setup |
-|-------|--------|-------|
-| ⚡ **OpenClaw** | ✅ Ready | See [MCP Setup](#mcp-setup) |
-| 🖥️ **Cursor** | ✅ Ready | See [MCP Setup](#mcp-setup) |
-| 🧠 **Claude Code** | ✅ Ready | See [MCP Setup](#mcp-setup) |
-| 🔧 **Cline** | ✅ Ready | See [MCP Setup](#mcp-setup) |
-| 🌐 **Any MCP Agent** | ✅ Ready | Connect to `mcp/server.ts` |
-
-### MCP Tools Available
-
-| Tool | Description |
-|------|-------------|
-| `keelead_search_leads` | Search for leads with natural language |
-| `keelead_verify_email` | Verify an email address |
-| `keelead_research_company` | Deep research on a company |
-| `keelead_find_contact` | Find contact information |
-| `keelead_enrich_lead` | Enrich a lead with more data |
-| `keelead_export_leads` | Export leads to various formats |
-| `keelead_get_signals` | Get intent signals for a company |
-| `keelead_email_pattern` | Find email patterns for a domain |
-| `keelead_list_sources` | List available data sources |
-| `keelead_lead_score` | Score a lead against ICP |
-
-### MCP Setup
-
-#### OpenClaw
-Add to your OpenClaw config:
-```json
-{
-  "mcp": {
-    "servers": {
-      "keelead": {
-        "command": "npx",
-        "args": ["tsx", "/path/to/keelead/mcp/server.ts"]
-      }
-    }
-  }
-}
+```env
+HUNTER_API_KEY=...
+CLEARBIT_API_KEY=...
 ```
 
-#### Cursor
-Add to `.cursor/mcp.json`:
-```json
-{
-  "mcpServers": {
-    "keelead": {
-      "command": "npx",
-      "args": ["tsx", "/path/to/keelead/mcp/server.ts"]
-    }
-  }
-}
-```
+### 🔔 Notifications (Optional)
 
-#### Claude Code
-```bash
-claude mcp add keelead -- npx tsx /path/to/keelead/mcp/server.ts
-```
-
-#### Cline
-Add to Cline MCP settings:
-```json
-{
-  "keelead": {
-    "command": "npx",
-    "args": ["tsx", "/path/to/keelead/mcp/server.ts"]
-  }
-}
+```env
+SLACK_WEBHOOK_URL=...
+DISCORD_WEBHOOK_URL=...
 ```
 
 ---
 
-## 📡 API Documentation
+## 🔑 API Keys Guide
 
-KeeLead provides a comprehensive REST API with interactive documentation.
+### Tier 1: Start Here (Free & Essential)
 
-### Interactive Docs
-Visit **http://localhost:3000/api/docs** for the full interactive API documentation.
+1. **Ollama** (FREE local AI)
+   ```bash
+   # Install Ollama
+   curl -fsSL https://ollama.ai/install.sh | sh
+   # Pull a model
+   ollama pull llama3.1
+   # KeeLead auto-detects it at http://localhost:11434
+   ```
 
-### API Endpoints
+2. **OpenRouter** (Access to 100+ models, pay-as-you-go)
+   - Go to [openrouter.ai](https://openrouter.ai)
+   - Create account → Get API key
+   - Add to `.env`: `OPENROUTER_API_KEY=sk-or-...`
 
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/chat` | POST | Send chat message, get AI response |
-| `/api/leads` | GET/POST | Search and retrieve leads |
-| `/api/research` | POST | Research a company |
-| `/api/verify` | POST | Verify email addresses |
-| `/api/export` | POST/GET | Export leads |
-| `/api/settings` | GET/POST | Manage settings |
-| `/api/conversations` | GET/POST/DELETE | Manage conversations |
-| `/api/sources` | GET | List data sources |
-| `/api/templates` | GET | Get templates |
-| `/api/enrich` | POST | Enrich lead data |
-| `/api/enrich/patterns` | POST | Find email patterns |
-| `/api/score` | POST | Score a lead |
-| `/api/signals` | GET | Get intent signals |
-| `/api/analytics` | GET | Get analytics data |
-| `/api/campaigns` | GET/POST | Manage campaigns |
-| `/api/agents/functions` | GET | Agent function definitions |
+### Tier 2: Enhance Search (Optional)
 
-### Example: Search Leads
+3. **Google Custom Search** (100 free/day)
+   - Go to [console.cloud.google.com](https://console.cloud.google.com)
+   - Enable "Custom Search API"
+   - Create API key
+   - Go to [programmablesearchengine.google.com](https://programmablesearchengine.google.com)
+   - Create a search engine, get the CX ID
+   - Add both to `.env`
 
-```bash
-curl -X POST http://localhost:3000/api/leads \
-  -H "Content-Type: application/json" \
-  -d '{"query": "SaaS founders in San Francisco", "limit": 50}'
-```
+4. **Brave Search** (2,000 free/month)
+   - Go to [api.search.brave.com](https://api.search.brave.com)
+   - Create account → Get API key
+   - Add to `.env`: `BRAVE_SEARCH_API_KEY=...`
 
-### Example: Verify Email
+### Tier 3: Premium Data (Optional)
 
-```bash
-curl -X POST http://localhost:3000/api/verify \
-  -H "Content-Type: application/json" \
-  -d '{"email": "test@example.com"}'
-```
+5. **Hunter.io** (25 free/month)
+   - Go to [hunter.io](https://hunter.io)
+   - Create account → Get API key
+   - Add to `.env`: `HUNTER_API_KEY=...`
 
-### Example: Research Company
+6. **Yelp Fusion** (5,000 free/day)
+   - Go to [fusion.yelp.com](https://fusion.yelp.com)
+   - Create app → Get API key
+   - Add to `.env`: `YELP_API_KEY=...`
 
-```bash
-curl -X POST http://localhost:3000/api/research \
-  -H "Content-Type: application/json" \
-  -d '{"company": "Tesla"}'
-```
-
----
-
-## 🖥️ CLI
-
-KeeLead includes a powerful CLI for terminal users.
-
-### Commands
-
-```bash
-# Natural language lead search
-npx tsx cli/index.ts chat "find 50 SaaS founders in SF"
-
-# Verify an email
-npx tsx cli/index.ts verify john@example.com
-
-# Research a company
-npx tsx cli/index.ts research Tesla
-
-# Export leads
-npx tsx cli/index.ts export --format csv --filter "score>80"
-
-# Start web UI
-npx tsx cli/index.ts serve
-
-# Show status
-npx tsx cli/index.ts status
-
-# List data sources
-npx tsx cli/index.ts sources
-
-# Batch verify emails from CSV
-npx tsx cli/index.ts batch-verify emails.csv
-```
-
-### CLI Options
-
-```bash
-npx tsx cli/index.ts [command] [options]
-
-Commands:
-  chat <query>           Natural language lead search
-  verify <email>         Verify an email address
-  research <company>     Research a company
-  export [options]       Export leads
-  serve                  Start web UI
-  status                 Show system status
-  sources                List available data sources
-  batch-verify <file>    Batch verify emails from CSV
-  config <key> <value>   Set configuration
-
-Options:
-  --format               Export format (csv, json, xlsx, vcard, pdf)
-  --filter               Filter expression
-  --limit                Max results
-  --output               Output file path
-  --verbose              Enable verbose logging
-```
+7. **Google Maps** ($200 free credit/month)
+   - Go to [console.cloud.google.com](https://console.cloud.google.com)
+   - Enable "Places API"
+   - Create API key
+   - Add to `.env`: `GOOGLE_MAPS_API_KEY=...`
 
 ---
 
 ## 🐳 Docker
 
 ### Quick Start
-
 ```bash
 docker-compose up -d
 ```
 
-### Docker Compose
-
-```yaml
-version: '3.8'
-services:
-  keelead:
-    build: .
-    ports:
-      - "3000:3000"
-    volumes:
-      - ./data:/app/prisma
-      - ./.env:/app/.env
-    environment:
-      - NODE_ENV=production
-    restart: unless-stopped
-```
-
-### Build & Run
-
+### Manual Build
 ```bash
-# Build image
 docker build -t keelead .
-
-# Run container
-docker run -d \
-  --name keelead \
-  -p 3000:3000 \
-  -v ./data:/app/prisma \
-  -v ./.env:/app/.env \
-  keelead
+docker run -p 3000:3000 keelead
 ```
 
-### Environment Variables in Docker
-
+### With Environment Variables
 ```bash
-docker run -d \
-  --name keelead \
-  -p 3000:3000 \
+docker run -p 3000:3000 \
   -e OPENAI_API_KEY=sk-... \
-  -e ANTHROPIC_API_KEY=sk-ant-... \
+  -e DATABASE_URL=file:./prisma/keelead.db \
   keelead
 ```
 
@@ -817,543 +408,154 @@ docker run -d \
 
 ## 🏗️ Architecture
 
-### System Architecture
-
-```
-┌─────────────────────────────────────────────────────────────┐
-│                      KeeLead Platform                        │
-├─────────────────────────────────────────────────────────────┤
-│                                                              │
-│  ┌──────────┐  ┌──────────┐  ┌──────────┐  ┌──────────┐   │
-│  │ Web UI   │  │ CLI      │  │ MCP      │  │ REST API │   │
-│  │ (Next.js)│  │ (Ink)    │  │ Server   │  │ (Routes) │   │
-│  └────┬─────┘  └────┬─────┘  └────┬─────┘  └────┬─────┘   │
-│       │              │              │              │          │
-│  ┌────┴──────────────┴──────────────┴──────────────┴─────┐  │
-│  │                    Core Engine                          │  │
-│  ├────────────────────────────────────────────────────────┤  │
-│  │  AI Engine  │ Lead Engine │ Email Verifier │ Research   │  │
-│  ├────────────────────────────────────────────────────────┤  │
-│  │  Enrichment │ Signals     │ Outreach      │ Analytics  │  │
-│  ├────────────────────────────────────────────────────────┤  │
-│  │  Webhooks   │ Plugins     │ Templates     │ Batch      │  │
-│  ├────────────────────────────────────────────────────────┤  │
-│  │  Cache      │ Compliance  │ Integrations  │ Export     │  │
-│  └────────────────────────────────────────────────────────┘  │
-│                                                              │
-│  ┌────────────────────────────────────────────────────────┐  │
-│  │              62 Data Source Plugins                      │  │
-│  ├────────┬────────┬────────┬────────┬────────┬──────────┤  │
-│  │ Search │ Social │Company │ Local  │ Email  │ Startup  │  │
-│  │  (5)   │  (8)   │  (7)   │  (8)   │  (5)   │   (5)    │  │
-│  ├────────┼────────┼────────┼────────┼────────┼──────────┤  │
-│  │ Govt   │ Edu    │Events  │Developer│Prof.  │          │  │
-│  │  (6)   │  (4)   │  (4)   │  (6)   │  (4)   │          │  │
-│  └────────┴────────┴────────┴────────┴────────┴──────────┘  │
-│                                                              │
-│  ┌────────────────────────────────────────────────────────┐  │
-│  │              SQLite Database (Prisma ORM)                │  │
-│  └────────────────────────────────────────────────────────┘  │
-└─────────────────────────────────────────────────────────────┘
-```
-
-### Data Flow
-
-```
-User Query → AI Parser → Source Manager → 62 Sources → Results
-                                    ↓
-                              Deduplication → Scoring → Response
-                                    ↓
-                              Database ← Export / CRM / Webhook
-```
-
----
-
-## 🛠️ Tech Stack
-
-| Layer | Technology | Purpose |
-|-------|-----------|---------|
-| **Framework** | Next.js 14 | Full-stack React framework |
-| **Language** | TypeScript 5.7 | Type-safe code |
-| **Styling** | Tailwind CSS 3.4 | Utility-first CSS |
-| **Components** | shadcn/ui | Beautiful UI components |
-| **Database** | SQLite | Lightweight, portable |
-| **ORM** | Prisma 5.22 | Type-safe database access |
-| **Charts** | Recharts | Beautiful charts |
-| **Icons** | Lucide React | 1000+ icons |
-| **AI** | Multi-provider | OpenAI, Claude, etc. |
-| **Markdown** | react-markdown | Rich text rendering |
-| **Validation** | Zod | Schema validation |
-| **Docker** | Docker + Compose | Containerization |
-
----
-
-## 📁 Project Structure
-
 ```
 keelead/
-├── app/                          # Next.js App Router
-│   ├── page.tsx                  # Landing page
-│   ├── chat/page.tsx             # AI chat interface
-│   ├── dashboard/                # Dashboard pages
-│   │   ├── page.tsx              # Overview
-│   │   ├── leads/page.tsx        # Lead management
-│   │   ├── pipeline/page.tsx     # Kanban pipeline
-│   │   ├── campaigns/page.tsx    # Campaign management
-│   │   ├── sequences/page.tsx    # Email sequences
-│   │   ├── research/page.tsx     # Company research
-│   │   ├── finder/page.tsx       # Contact finder
-│   │   ├── verify/page.tsx       # Email verification
-│   │   ├── signals/page.tsx      # Intent signals
-│   │   ├── analytics/page.tsx    # Analytics
-│   │   ├── export/page.tsx       # Export center
-│   │   ├── compliance/page.tsx   # Compliance
-│   │   ├── settings/page.tsx     # Settings
-│   │   └── layout.tsx            # Dashboard layout
-│   └── api/                      # API routes
-│       ├── chat/route.ts         # Chat endpoint
-│       ├── leads/route.ts        # Leads CRUD
-│       ├── research/route.ts     # Company research
-│       ├── verify/route.ts       # Email verification
-│       ├── export/route.ts       # Export endpoint
-│       ├── settings/route.ts     # Settings CRUD
-│       ├── conversations/route.ts # Conversations
-│       ├── sources/route.ts      # Data sources
-│       ├── templates/route.ts    # Templates
-│       ├── enrich/route.ts       # Lead enrichment
-│       ├── score/route.ts        # Lead scoring
-│       ├── signals/route.ts      # Intent signals
-│       ├── analytics/route.ts    # Analytics
-│       ├── campaigns/route.ts    # Campaigns
-│       ├── agents/functions/     # Agent function defs
-│       └── docs/page.tsx         # API documentation
-├── components/ui/                # 19 UI components
-├── lib/                          # Core libraries
-│   ├── ai/                       # Multi-provider AI
-│   ├── lead-engine/              # Lead generation engine
-│   ├── email/                    # 10-layer email verification
-│   ├── research/                 # Company research engine
-│   ├── enrichment/               # Waterfall enrichment
-│   ├── signals/                  # Intent signal tracking
-│   ├── outreach/                 # Email sequences
-│   ├── analytics/                # Analytics engine
-│   ├── compliance/               # GDPR/CAN-SPAM
-│   ├── integrations/             # Webhooks, CRM, etc.
-│   ├── webhooks/                 # Webhook system
-│   ├── plugins/                  # Plugin system
-│   ├── templates/                # Email/search/export templates
-│   ├── batch/                    # Batch operations
-│   ├── cache/                    # Caching layer
-│   ├── agent/                    # AI agent integration
-│   ├── scraper/                  # Web scraping utilities
-│   ├── sources/                  # 62 data source plugins
-│   │   ├── search/               # (5 sources)
-│   │   ├── social/               # (8 sources)
-│   │   ├── company/              # (7 sources)
-│   │   ├── local/                # (8 sources)
-│   │   ├── email/                # (5 sources)
-│   │   ├── startup/              # (5 sources)
-│   │   ├── government/           # (6 sources)
-│   │   ├── education/            # (4 sources)
-│   │   ├── events/               # (4 sources)
-│   │   ├── developer/            # (6 sources)
-│   │   └── professional/         # (4 sources)
-│   ├── db/                       # Database client
-│   └── utils.ts                  # Utilities
-├── cli/                          # CLI interface
-├── mcp/                          # MCP server
-│   ├── server.ts                 # MCP server implementation
-│   └── README.md                 # MCP setup guide
-├── prisma/                       # Database
-│   ├── schema.prisma             # Database schema
-│   ├── seed.ts                   # Demo data seeder
-│   └── keelead.db                # SQLite database
-├── public/                       # Static assets
-│   ├── logo.svg                  # KeeLead logo
-│   └── favicon.svg               # Favicon
-├── Dockerfile                    # Docker build
-├── docker-compose.yml            # Docker Compose
-├── package.json                  # Dependencies
-├── tsconfig.json                 # TypeScript config
-├── tailwind.config.js            # Tailwind config
-├── next.config.js                # Next.js config
-├── .env.example                  # Environment template
-├── .env                          # Environment (local)
-├── LICENSE                       # MIT License
-└── README.md                     # This file
+├── app/                    # Next.js App Router
+│   ├── api/               # API routes
+│   │   ├── chat/          # AI chat endpoint
+│   │   ├── leads/         # Lead CRUD
+│   │   ├── verify/        # Email verification
+│   │   ├── sources/       # Data source management
+│   │   ├── export/        # Export endpoints
+│   │   └── ...
+│   ├── chat/              # Chat UI
+│   └── dashboard/         # Dashboard pages
+├── lib/
+│   ├── sources/           # 62 data source plugins
+│   │   ├── search/        # Search engines
+│   │   ├── professional/  # LinkedIn, Crunchbase, etc.
+│   │   ├── company/       # SEC EDGAR, OpenCorporates, etc.
+│   │   ├── local/         # OpenStreetMap, Yelp, etc.
+│   │   ├── social/        # GitHub, Reddit, etc.
+│   │   ├── developer/     # NPM, PyPI, Stack Overflow, etc.
+│   │   ├── startup/       # Indie Hackers, Beta List, etc.
+│   │   ├── government/    # USASpending, Census, Patents, etc.
+│   │   ├── education/     # Google Scholar, ORCID, etc.
+│   │   ├── email/         # DNS, WHOIS, SSL, etc.
+│   │   ├── events/        # Conference speakers, etc.
+│   │   ├── base.ts        # Base source class
+│   │   ├── types.ts       # Type definitions
+│   │   └── index.ts       # Source manager
+│   ├── browser/           # Playwright browser automation
+│   │   ├── index.ts       # BrowserAutomation class
+│   │   └── scraping-utils.ts
+│   ├── ai/                # AI provider abstraction
+│   ├── agent/             # AI agent & function calling
+│   ├── email/             # Email verification engine
+│   └── ...
+├── prisma/                # Database schema
+├── mcp/                   # MCP server
+├── cli/                   # CLI tool
+└── components/            # React components
 ```
+
+### Tech Stack
+- **Frontend**: Next.js 14, React, TypeScript, Tailwind CSS
+- **Backend**: Next.js API Routes, Prisma ORM
+- **Database**: SQLite (easily switch to PostgreSQL)
+- **AI**: Multi-provider (OpenAI, Claude, Ollama, Groq, etc.)
+- **Browser**: Playwright for automation
+- **License**: MIT
 
 ---
 
-## 🗄️ Database Schema
+## 🤖 AI Agent Integration
 
-### Lead
-```prisma
-model Lead {
-  id          String   @id @default(cuid())
-  firstName   String
-  lastName    String
-  email       String?
-  phone       String?
-  company     String?
-  title       String?
-  website     String?
-  linkedin    String?
-  location    String?
-  source      String?
-  status      String   @default("new")
-  score       Int      @default(0)
-  verified    Boolean  @default(false)
-  tags        String?  // JSON array
-  notes       String?
-  metadata    String?  // JSON object
-  campaignId  String?
-  campaign    Campaign?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
-```
-
-### Campaign
-```prisma
-model Campaign {
-  id          String   @id @default(cuid())
-  name        String
-  description String?
-  status      String   @default("draft")
-  type        String   @default("email")
-  targetLeads Int      @default(0)
-  sentCount   Int      @default(0)
-  openRate    Float    @default(0)
-  replyRate   Float    @default(0)
-  leads       Lead[]
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-}
-```
-
-### Conversation & Message
-```prisma
-model Conversation {
-  id        String    @id @default(cuid())
-  title     String?
-  messages  Message[]
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-}
-
-model Message {
-  id             String       @id @default(cuid())
-  role           String       // user, assistant, system
-  content        String
-  conversationId String
-  conversation   Conversation @relation(...)
-  metadata       String?      // JSON for results
-  createdAt      DateTime     @default(now())
-}
-```
-
----
-
-## 🪝 Webhooks
-
-KeeLead supports webhooks for real-time event notifications.
-
-### Event Types (25+)
-
-| Event | Description |
-|-------|-------------|
-| `lead.created` | New lead added |
-| `lead.updated` | Lead information updated |
-| `lead.deleted` | Lead removed |
-| `lead.scored` | Lead score calculated |
-| `lead.enriched` | Lead enriched with new data |
-| `email.verified` | Email verification completed |
-| `email.valid` | Email verified as valid |
-| `email.invalid` | Email verified as invalid |
-| `campaign.created` | New campaign created |
-| `campaign.started` | Campaign started |
-| `campaign.completed` | Campaign completed |
-| `research.completed` | Company research finished |
-| `export.completed` | Export finished |
-| `signal.detected` | Intent signal detected |
-| `batch.completed` | Batch operation finished |
-| And more... | |
-
-### Webhook Configuration
+### MCP Server
+KeeLead includes a built-in MCP (Model Context Protocol) server for AI agent integration.
 
 ```bash
-# Via Settings UI
-Dashboard → Settings → Webhooks → Add Webhook
-
-# Via API
-curl -X POST http://localhost:3000/api/settings \
-  -H "Content-Type: application/json" \
-  -d '{
-    "key": "webhook_myapp",
-    "value": {
-      "url": "https://your-app.com/webhook",
-      "events": ["lead.created", "email.verified"],
-      "secret": "your-hmac-secret"
-    }
-  }'
+# Start MCP server
+npm run mcp
 ```
 
----
-
-## 🔌 Plugin System
-
-Extend KeeLead with custom plugins.
-
-### Built-in Plugins (6)
-
-| Plugin | Description |
-|--------|-------------|
-| `dedup` | Automatic lead deduplication |
-| `scoring` | AI-powered lead scoring |
-| `enrichment` | Auto-enrichment on lead creation |
-| `notifications` | Send notifications on events |
-| `logging` | Detailed activity logging |
-| `analytics` | Track source performance |
-
-### Creating a Plugin
-
-```typescript
-import { Plugin, PluginContext } from '../lib/plugins/plugin-interface'
-
-export class MyPlugin implements Plugin {
-  id = 'my-plugin'
-  name = 'My Plugin'
-  version = '1.0.0'
-
-  async onLeadCreated(ctx: PluginContext, lead: any) {
-    // Your logic here
-  }
-
-  async onEmailVerified(ctx: PluginContext, result: any) {
-    // Your logic here
-  }
-}
-```
+### Function Calling
+AI agents can use these tools:
+- `keelead_search_leads` — Search across 62 data sources
+- `keelead_verify_email` — 10-layer email verification
+- `keelead_research_company` — Deep company research
+- `keelead_find_contact` — Find contact information
+- `keelead_enrich_lead` — Enrich lead data
 
 ---
 
-## 📧 Templates
+## 📤 Export Formats
 
-### Email Templates (6)
-- Cold outreach
-- Follow-up
-- Introduction
-- Referral
-- Re-engagement
-- Thank you
-
-### Search Templates (8)
-- SaaS founders
-- Enterprise CTOs
-- Local businesses
-- Startup employees
-- GitHub developers
-- Conference speakers
-- Job seekers
-- Industry experts
-
-### Export Formats (7)
-- CSV
-- JSON
-- Excel (XLSX)
-- vCard (VCF)
-- PDF
-- XML
-- YAML
+Export leads in 7 formats:
+- **CSV** — Spreadsheet compatible
+- **JSON** — Developer-friendly
+- **Excel (XLSX)** — Microsoft Excel
+- **vCard** — Contact import
+- **PDF** — Reports & presentations
+- **XML** — Enterprise integration
+- **YAML** — Configuration-friendly
 
 ---
 
-## 🔒 Security
+## 🛡️ Security
 
-- **Self-hosted**: Your data never leaves your server
-- **No tracking**: Zero third-party analytics
-- **API key vault**: Encrypted storage for all keys
-- **Audit log**: Full activity tracking
-- **GDPR compliant**: Built-in compliance tools
-- **CAN-SPAM compliant**: Unsubscribe management
-- **Rate limiting**: Per-source rate limiting
-- **Proxy support**: HTTP/SOCKS5 proxy rotation
-- **User agent rotation**: Randomized user agents
-- **Request caching**: Avoid redundant API calls
-- **Local-first**: SQLite database, no cloud dependency
-
----
-
-## ⚡ Performance
-
-- **SQLite**: Zero-config, embedded database
-- **Prisma ORM**: Type-safe, optimized queries
-- **Next.js SSG**: Pre-rendered static pages
-- **Code splitting**: Automatic per-page bundles
-- **Caching**: Built-in cache layer with TTL/LRU
-- **Batch processing**: Handle large operations efficiently
-- **Streaming**: Real-time AI responses
-- **Lazy loading**: Components loaded on demand
-
----
-
-## 🔧 Troubleshooting
-
-### Common Issues
-
-#### "AI provider not configured"
-→ Go to Settings → AI Models and add at least one API key
-
-#### "Database not found"
-→ Run `npx prisma db push` to create the database
-
-#### "Port 3000 already in use"
-→ Change port: `PORT=3001 npm run dev`
-
-#### "Build fails"
-→ Clear cache: `rm -rf .next node_modules && npm install && npm run build`
-
-#### "MCP server not connecting"
-→ Ensure `npx tsx` is available: `npm install -g tsx`
-
-### Getting Help
-
-1. Check the [Issues](https://github.com/YOUR_USERNAME/keelead/issues) page
-2. Search existing issues
-3. Create a new issue with:
-   - Description of the problem
-   - Steps to reproduce
-   - Expected vs actual behavior
-   - Environment details (OS, Node version, etc.)
+- All API keys stored encrypted
+- Self-hosted — your data never leaves your server
+- No telemetry or tracking
+- GDPR & CAN-SPAM compliant tools
+- Audit logging for all actions
 
 ---
 
 ## 🗺️ Roadmap
+
+### v2.0 ✅ (Current)
+- [x] 62 data sources (35 free + 27 premium)
+- [x] AI chat interface with multi-provider support
+- [x] 10-layer email verification
+- [x] OpenStreetMap local business search
+- [x] Browser automation with Playwright
+- [x] Dashboard with 15+ pages
+- [x] Campaign management
+- [x] Pipeline (Kanban)
+- [x] Export in 7 formats
+- [x] Compliance tools
 
 ### v2.1 (Next)
 - [ ] Browser extension (Chrome/Firefox)
 - [ ] Real-time collaboration
 - [ ] Voice interface (speech-to-text)
 - [ ] Mobile app (React Native)
-- [ ] More AI providers (Gemini, Cohere, etc.)
-
-### v3.0 (Future)
-- [ ] Multi-user support with authentication
-- [ ] Team workspaces
-- [ ] Advanced analytics dashboard
-- [ ] CRM native integrations (Salesforce, HubSpot)
-- [ ] Automated outreach sequences
-- [ ] AI-powered lead nurturing
-- [ ] White-label support
+- [ ] CRM integrations (HubSpot, Salesforce)
+- [ ] Webhook triggers
+- [ ] Plugin marketplace
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions of all kinds!
+We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
 
-### How to Contribute
-
-1. **Fork** the repository
-2. **Clone** your fork
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/keelead.git
-   ```
-3. **Create** a feature branch
-   ```bash
-   git checkout -b feature/amazing-feature
-   ```
-4. **Make** your changes
-5. **Test** thoroughly
-   ```bash
-   npm run build
-   npm run lint
-   ```
-6. **Commit** with a clear message
-   ```bash
-   git commit -m "Add: amazing feature description"
-   ```
-7. **Push** to your fork
-   ```bash
-   git push origin feature/amazing-feature
-   ```
-8. **Create** a Pull Request
-
-### Contribution Ideas
-
-- 📡 Add new data source plugins
-- 🎨 Improve UI/UX
-- 📝 Add email templates
-- 🐛 Fix bugs
-- 📖 Improve documentation
-- 🧪 Add tests
-- 🌐 Add translations
-- ⚡ Performance improvements
-
-### Code Style
-
-- TypeScript with strict types
-- ESLint + Prettier formatting
-- Conventional commits
-- Component-based architecture
-- Comprehensive JSDoc comments
+### Adding a New Data Source
+1. Create a file in `lib/sources/{category}/your-source.ts`
+2. Extend `BaseSource` class
+3. Implement `search()`, optionally `getCompany()` and `getContact()`
+4. Register in `lib/sources/index.ts`
+5. Submit a PR!
 
 ---
 
-## 📜 License
+## 📄 License
 
-MIT License — see [LICENSE](LICENSE) for details.
-
-```
-MIT License
-
-Copyright (c) 2026 KeeLead
-
-Permission is free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"),
-to deal in the Software without restriction, including without limitation
-the rights to use, copy, modify, merge, publish, distribute, sublicense,
-and/or sell copies of the Software, and to permit persons to whom the
-Software is furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included
-in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-```
+MIT License — see [LICENSE](LICENSE)
 
 ---
 
 ## 🙏 Acknowledgments
 
-Built with ❤️ using:
-- [Next.js](https://nextjs.org/) — The React Framework
-- [Tailwind CSS](https://tailwindcss.com/) — Utility-first CSS
-- [shadcn/ui](https://ui.shadcn.com/) — Beautiful components
-- [Prisma](https://www.prisma.io/) — Next-generation ORM
-- [Lucide](https://lucide.dev/) — Beautiful icons
-- [Recharts](https://recharts.org/) — Composable charting library
-- [Model Context Protocol](https://modelcontextprotocol.io/) — AI agent integration
-
-Inspired by:
-- [Clay](https://clay.com/) — Data enrichment workflows
-- [Apollo.io](https://apollo.io/) — Sales intelligence platform
-- [ZoomInfo](https://zoominfo.com/) — B2B database
-- [Hunter.io](https://hunter.io/) — Email finder
+- [Next.js](https://nextjs.org) — React framework
+- [Prisma](https://prisma.io) — Database ORM
+- [Tailwind CSS](https://tailwindcss.com) — Styling
+- [OpenStreetMap](https://openstreetmap.org) — Free map data
+- [Playwright](https://playwright.dev) — Browser automation
 
 ---
 
-<div align="center">
-
-**[⬆ Back to top](#-keelead)**
-
----
-
-Made with ⚡ by the KeeLead Community
-
-**Star ⭐ this repo if you find it useful!**
-
-</div>
+<p align="center">
+  Made with ⚡ by the KeeLead community
+</p>
