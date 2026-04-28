@@ -2,40 +2,109 @@
 import { BaseSource } from "../base"
 import type { Lead, SearchOptions, CompanyData, ContactData } from "../types"
 
+interface RedditPost {
+  author: string
+  title: string
+  selftext: string
+  subreddit: string
+  url: string
+  author_flair_text?: string
+  score: number
+  num_comments: number
+  created_utc: number
+  permalink: string
+  is_self: boolean
+  link_flair_text?: string
+}
+
+interface RedditChild {
+  data: RedditPost
+}
+
+interface RedditListing {
+  data: {
+    children: RedditChild[]
+    after: string | null
+  }
+}
+
 export class RedditSourceSource extends BaseSource {
   name = "Reddit"
   id = "reddit"
   category = "social"
   requiresApiKey = false
-  rateLimit = 60
+  rateLimit = 30 // Reddit is strict about rate limits
 
   async search(query: string, options?: SearchOptions): Promise<Lead[]> {
-    const count = Math.min(options?.count || 10, 50)
+    const count = Math.min(options?.count || 10, 100)
+    const url = `https://www.reddit.com/search.json?q=${encodeURIComponent(query)}&limit=${count}&sort=relevance`
+    const data = await this.fetchJson<RedditListing>(url, {
+      "User-Agent": "KeeLead/1.0",
+    })
+    if (!data?.data?.children?.length) return []
+
     const leads: Lead[] = []
-    for (let i = 0; i < count; i++) {
+    const seen = new Set<string>()
+
+    for (const child of data.data.children) {
+      const post = child.data
+      if (!post.author || post.author === "[deleted]" || post.author === "AutoModerator") continue
+      if (seen.has(post.author)) continue
+      seen.add(post.author)
+
+      // Extract organization hints from flair
+      const company = post.author_flair_text || options?.company
+
       leads.push(this.makeLead({
-        firstName: this.randomFrom(["Alex", "Jordan", "Taylor", "Morgan", "Casey", "Riley", "Avery", "Quinn"]),
-        lastName: this.randomFrom(["Chen", "Smith", "Patel", "Kim", "Johnson", "Garcia", "Mueller", "Tanaka"]),
-        company: options?.company || query,
-        title: options?.title || this.randomFrom(["CEO", "CTO", "VP Engineering", "Director", "Manager", "Lead"]),
-        email: `contact${i}@${this.generateDomain(options?.company || query)}`,
-        phone: this.generatePhone(),
-        location: options?.location || this.randomFrom(["San Francisco, CA", "New York, NY", "Austin, TX", "Seattle, WA", "London, UK"]),
-        confidence: 0.5 + Math.random() * 0.4,
-        tags: ["social", "reddit"],
-        metadata: { source: "Reddit", description: "Reddit user profiles" },
+        firstName: post.author,
+        lastName: "",
+        company,
+        title: `r/${post.subreddit} Contributor`,
+        website: `https://reddit.com${post.permalink}`,
+        confidence: 0.4,
+        tags: [
+          "social", "reddit",
+          `subreddit:${post.subreddit}`,
+          ...(post.link_flair_text ? [post.link_flair_text] : []),
+        ],
+        metadata: {
+          source: "Reddit",
+          username: post.author,
+          subreddit: post.subreddit,
+          postTitle: post.title,
+          score: post.score,
+          numComments: post.num_comments,
+          flair: post.author_flair_text,
+          createdUtc: post.created_utc,
+        },
       }))
     }
     return leads
   }
 
   async getCompany(domain: string): Promise<CompanyData | null> {
+    // Search Reddit for mentions of the company
+    const url = `https://www.reddit.com/search.json?q=${encodeURIComponent(domain)}&limit=5`
+    const data = await this.fetchJson<RedditListing>(url, { "User-Agent": "KeeLead/1.0" })
+    if (!data?.data?.children?.length) return null
+
+    const subreddits = new Set<string>()
+    let totalScore = 0
+    for (const child of data.data.children) {
+      subreddits.add(child.data.subreddit)
+      totalScore += child.data.score
+    }
+
     return this.makeCompany({
       name: domain.replace(/\.(com|io|co|org|net)$/, ""),
       domain,
       website: `https://${domain}`,
-      description: "Company data from Reddit",
+      description: `Mentioned in ${subreddits.size} subreddits with ${totalScore} total upvotes`,
       industry: "Technology",
+      metadata: {
+        subreddits: [...subreddits],
+        totalMentions: data.data.children.length,
+      },
     })
   }
 

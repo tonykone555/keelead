@@ -2,6 +2,24 @@
 import { BaseSource } from "../base"
 import type { Lead, SearchOptions, CompanyData, ContactData } from "../types"
 
+interface NPMPackage {
+  package: {
+    name: string
+    description: string
+    author?: { name: string; email?: string; url?: string }
+    publisher?: { username: string; email?: string }
+    links?: { repository?: string; homepage?: string; npm?: string }
+    maintainers?: Array<{ username: string; email?: string }>
+    keywords?: string[]
+    date?: string
+  }
+}
+
+interface NPMSearchResponse {
+  objects: NPMPackage[]
+  total: number
+}
+
 export class NPMSourceSource extends BaseSource {
   name = "NPM"
   id = "npm"
@@ -11,19 +29,51 @@ export class NPMSourceSource extends BaseSource {
 
   async search(query: string, options?: SearchOptions): Promise<Lead[]> {
     const count = Math.min(options?.count || 10, 50)
+    const url = `https://registry.npmjs.org/-/v1/search?text=${encodeURIComponent(query)}&size=${count}`
+    const data = await this.fetchJson<NPMSearchResponse>(url)
+    if (!data?.objects?.length) return []
+
     const leads: Lead[] = []
-    for (let i = 0; i < count; i++) {
+    for (const obj of data.objects) {
+      const pkg = obj.package
+      const author = pkg.author
+      const publisher = pkg.publisher
+      const maintainers = pkg.maintainers || []
+
+      // Try to extract a name from author or publisher
+      const nameStr = author?.name || publisher?.username || ""
+      if (!nameStr) continue
+
+      const parts = nameStr.trim().split(/\s+/)
+      const firstName = parts[0] || ""
+      const lastName = parts.length > 1 ? parts.slice(1).join(" ") : ""
+
+      // Extract email from author, publisher, or first maintainer
+      const email = author?.email || publisher?.email || maintainers[0]?.email || undefined
+
+      // Try to infer company from links
+      let company: string | undefined
+      const repo = pkg.links?.repository || ""
+      const homepage = pkg.links?.homepage || ""
+      const urlMatch = (repo || homepage).match(/github\.com\/([^/]+)/)
+      if (urlMatch) company = urlMatch[1]
+
       leads.push(this.makeLead({
-        firstName: this.randomFrom(["Alex", "Jordan", "Taylor", "Morgan", "Casey", "Riley", "Avery", "Quinn"]),
-        lastName: this.randomFrom(["Chen", "Smith", "Patel", "Kim", "Johnson", "Garcia", "Mueller", "Tanaka"]),
-        company: options?.company || query,
-        title: options?.title || this.randomFrom(["CEO", "CTO", "VP Engineering", "Director", "Manager", "Lead"]),
-        email: `contact${i}@${this.generateDomain(options?.company || query)}`,
-        phone: this.generatePhone(),
-        location: options?.location || this.randomFrom(["San Francisco, CA", "New York, NY", "Austin, TX", "Seattle, WA", "London, UK"]),
-        confidence: 0.5 + Math.random() * 0.4,
-        tags: ["developer", "npm"],
-        metadata: { source: "NPM", description: "NPM package authors" },
+        firstName,
+        lastName,
+        email,
+        company: company || options?.company,
+        title: "Package Author",
+        website: pkg.links?.homepage || pkg.links?.repository || undefined,
+        confidence: email ? 0.8 : 0.6,
+        tags: ["developer", "npm", ...(pkg.keywords?.slice(0, 5) || [])],
+        metadata: {
+          source: "NPM",
+          packageName: pkg.name,
+          description: pkg.description,
+          repository: pkg.links?.repository,
+          lastPublished: pkg.date,
+        },
       }))
     }
     return leads
