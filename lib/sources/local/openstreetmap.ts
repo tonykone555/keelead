@@ -400,7 +400,7 @@ out center body;`
   /**
    * Main search method
    */
-  async search(query: string, options?: SearchOptions): Promise<Lead[]> {
+ async search(query: string, options?: SearchOptions): Promise<Lead[]> {
     const parsed = this.parseQuery(query)
 
     // Step 1: Geocode the location
@@ -409,16 +409,17 @@ out center body;`
       // Fallback: try searching just the raw query as a location
       const fallback = await this.geocode(query)
       if (!fallback) return []
-      return this.searchWithGeo({ ...parsed, location: query }, fallback)
+      return this.searchWithGeo({ ...parsed, location: query }, fallback, options)
     }
 
-    return this.searchWithGeo(parsed, geoResult)
+    return this.searchWithGeo(parsed, geoResult, options)
   }
 
   private async searchWithGeo(
     parsed: ParsedQuery,
-    geo: NominatimResult
-  ): Promise<Lead[]> {
+    geo: NominatimResult,
+    options?: SearchOptions
+  ): Promise<Lead[]> { 
     // Step 2: Build bbox string (south,west,north,east)
     const [south, north, west, east] = geo.boundingbox
     const bbox = `${south},${west},${north},${east}`
