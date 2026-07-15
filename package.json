@@ -14,7 +14,8 @@
     "db:reset": "npx prisma db push --force-reset && npx tsx prisma/seed.ts",
     "keelead": "npx tsx cli/index.ts",
     "mcp": "npx tsx mcp/server.ts",
-    "agent": "npx tsx mcp/server.ts --stdio"
+    "agent": "npx tsx mcp/server.ts --stdio",
+    "postinstall": "playwright install --with-deps chromium"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
@@ -30,7 +31,6 @@
     "@radix-ui/react-scroll-area": "^1.2.2",
     "@radix-ui/react-select": "^2.1.4",
     "@radix-ui/react-separator": "^1.1.1",
-
     "@radix-ui/react-slider": "^1.2.2",
     "@radix-ui/react-slot": "^1.1.1",
     "@radix-ui/react-switch": "^1.1.2",
