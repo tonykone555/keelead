@@ -15,7 +15,7 @@
     "keelead": "npx tsx cli/index.ts",
     "mcp": "npx tsx mcp/server.ts",
     "agent": "npx tsx mcp/server.ts --stdio",
-    "postinstall": "playwright install --with-deps chromium"
+    "postinstall": "playwright install chromium"
   },
   "dependencies": {
     "@prisma/client": "^5.22.0",
